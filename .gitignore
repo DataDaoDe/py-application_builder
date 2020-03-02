@@ -1,0 +1,13 @@
+# python relics
+__pycache__/
+.pytest_cache/
+*.py[oc]
+
+# environments
+env/
+
+# editors
+.vscode/
+
+# testing
+sandbox/

@@ -3,6 +3,11 @@ __pycache__/
 .pytest_cache/
 *.py[oc]
 
+# python packaging relics
+/dist/
+/*.egg-info
+.eggs/*
+
 # environments
 env/
 

@@ -1,7 +1,9 @@
+from __future__ import annotations
 from typing import (
     Protocol,
     Callable,
     Dict,
+    Union,
     Any
 )
 
@@ -68,13 +70,27 @@ class Application(object):
     def root_dir(self):
         return self._app_root_dir
 
-    def add_path(self, pathname: str, pathpart):
+    def add_path(self, 
+        pathname: str, 
+        pathpart: str,
+        append_to_root: bool = True
+    ) -> Application:
         if pathname == 'root':
-            raise Exception('cannot override application root path!')
+            raise Exception('Cannot override application root path.')
+        
+        new_path = ''
+        if append_to_root:
+            if pathpart.startswith('/'):
+                raise Exception('Cannot append paths prefixed with `/` to application root.')
+            new_path = os.path.join(self.root_dir(), pathpart)
+        else:
+            new_path = pathpart
 
-        self._paths[pathname] = os.path.join(self.root_dir(), pathpart)
+        self._paths[pathname] = new_path
 
-    def paths(name: str = None) -> Union[Dict[str,str], str]:
+        return self
+
+    def paths(self, name: str = None) -> Union[Dict[str,str], str]:
         if name:
             return self._paths[name]
         else:

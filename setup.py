@@ -9,7 +9,7 @@ test_requirements = ['pytest']
 
 setup(
     name = 'application_builder',
-    version = '0.1.0',
+    version = '0.1.1',
     author = 'John Faucett',
     author_email = 'john.faucett@datadao.de',
     description = 'manage application data and functionality in one place',

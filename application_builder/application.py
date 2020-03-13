@@ -50,6 +50,7 @@ class Application(object):
         self._environment = None
         self._settings_class_init_fn = settings_class_init_fn
         self._settings = None
+        self._components = {}
         self._booted = False
 
     def boot(self):
@@ -69,6 +70,17 @@ class Application(object):
 
     def root_dir(self):
         return self._app_root_dir
+
+    def add_component(
+        self,
+        component_name: str,
+        component: Any
+    ) -> Application:
+        self._components[component_name] = component
+        return self
+
+    def component(self, component_name) -> Any:
+        return self._components[component_name]
 
     def add_path(self, 
         pathname: str, 
